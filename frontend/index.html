@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Hospital Scheduler</title>
+    <meta name="description" content="Intelligent cloud-based scheduling system for hospitals using machine learning">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <rect width="40" height="40" rx="8" fill="url(#gradient1)"/>
+                        <path d="M20 10V30M10 20H30" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="gradient1" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#667eea"/>
+                                <stop offset="100%" stop-color="#764ba2"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <h1>Hospital Scheduler AI</h1>
+                </div>
+                <div class="status-badge" id="apiStatus">
+                    <span class="status-dot"></span>
+                    <span>Checking API...</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h2 class="hero-title">Intelligent Patient Wait Time Prediction</h2>
+                <p class="hero-subtitle">Optimize hospital resources with AI-powered scheduling predictions</p>
+            </section>
+
+            <!-- Prediction Form -->
+            <section class="prediction-section">
+                <div class="card glass-card">
+                    <div class="card-header">
+                        <h3>Patient Information</h3>
+                        <p>Enter patient and hospital details to predict wait time</p>
+                    </div>
+                    
+                    <form id="predictionForm" class="prediction-form">
+                        <div class="form-grid">
+                            <!-- Patient Details -->
+                            <div class="form-group">
+                                <label for="department">Department</label>
+                                <select id="department" name="department" required>
+                                    <option value="">Select Department</option>
+                                    <option value="Emergency">Emergency</option>
+                                    <option value="Cardiology">Cardiology</option>
+                                    <option value="Orthopedics">Orthopedics</option>
+                                    <option value="Pediatrics">Pediatrics</option>
+                                    <option value="General">General</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="priority">Priority Level</label>
+                                <select id="priority" name="priority" required>
+                                    <option value="">Select Priority</option>
+                                    <option value="Critical">Critical</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="patient_age">Patient Age</label>
+                                <input type="number" id="patient_age" name="patient_age" min="0" max="120" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="arrival_hour">Arrival Hour (0-23)</label>
+                                <input type="number" id="arrival_hour" name="arrival_hour" min="0" max="23" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="day_of_week">Day of Week</label>
+                                <select id="day_of_week" name="day_of_week" required>
+                                    <option value="">Select Day</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                    <option value="Sunday">Sunday</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="season">Season</label>
+                                <select id="season" name="season" required>
+                                    <option value="">Select Season</option>
+                                    <option value="Winter">Winter</option>
+                                    <option value="Spring">Spring</option>
+                                    <option value="Summer">Summer</option>
+                                    <option value="Fall">Fall</option>
+                                </select>
+                            </div>
+
+                            <!-- Hospital Resources -->
+                            <div class="form-group">
+                                <label for="num_available_doctors">Available Doctors</label>
+                                <input type="number" id="num_available_doctors" name="num_available_doctors" min="0" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="num_available_nurses">Available Nurses</label>
+                                <input type="number" id="num_available_nurses" name="num_available_nurses" min="0" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="num_available_rooms">Available Rooms</label>
+                                <input type="number" id="num_available_rooms" name="num_available_rooms" min="0" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="current_queue_length">Current Queue Length</label>
+                                <input type="number" id="current_queue_length" name="current_queue_length" min="0" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="is_weekend">Is Weekend?</label>
+                                <select id="is_weekend" name="is_weekend" required>
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="predictBtn">
+                            <span>Predict Wait Time</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Results Section -->
+                <div class="card glass-card result-card" id="resultCard" style="display: none;">
+                    <div class="result-header">
+                        <h3>Prediction Result</h3>
+                    </div>
+                    <div class="result-content">
+                        <div class="wait-time-display">
+                            <div class="wait-time-value" id="waitTimeValue">--</div>
+                            <div class="wait-time-label">Estimated Wait Time (minutes)</div>
+                        </div>
+                        <div class="result-details" id="resultDetails"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Model Info Section -->
+            <section class="info-section">
+                <div class="card glass-card">
+                    <div class="card-header">
+                        <h3>Model Information</h3>
+                    </div>
+                    <div class="info-grid" id="modelInfo">
+                        <div class="info-item">
+                            <div class="info-label">Model Type</div>
+                            <div class="info-value">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital Scheduler AI. Powered by Machine Learning & Cloud Computing.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

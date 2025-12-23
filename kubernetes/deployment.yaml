@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hospital-scheduler
+  name: hospital-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hospital-scheduler
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: hospital-scheduler
+    spec:
+      containers:
+      - image: hospital-scheduler-api:latest
+        name: hospital-scheduler-api
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+status: {}
