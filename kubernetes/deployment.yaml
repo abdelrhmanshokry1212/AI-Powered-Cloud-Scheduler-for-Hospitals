@@ -17,7 +17,10 @@ spec:
     spec:
       containers:
       - image: hospital-scheduler-api:latest
+        imagePullPolicy: IfNotPresent
         name: hospital-scheduler-api
+        ports:
+        - containerPort: 8000
         resources:
           requests:
             cpu: 100m
