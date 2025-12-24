@@ -11,6 +11,7 @@
 6. [Cloud Deployment](#cloud-deployment)
 7. [Technical Implementation](#technical-implementation)
 8. [Results & Performance](#results--performance)
+9. [Beginner Docker & Kubernetes Guide](#beginner-docker--kubernetes-guide)
 
 ---
 
@@ -26,6 +27,13 @@ The **AI-Powered Cloud Scheduler for Hospitals** is an intelligent cloud-based s
 - **Scalable Architecture**: Microservices-based design
 
 ---
+
+## Beginner Docker & Kubernetes Guide
+
+If you’re new to containerization and orchestration, read:
+
+- `docs/DOCKER_AND_KUBERNETES_BEGINNER_GUIDE.md`
+- `docs/KUBERNETES_TESTING_AND_URLS.md` (how to access endpoints like `/health` vs `/api/health`)
 
 ## Problem Statement
 
